@@ -1,0 +1,41 @@
+<% include ../partial/header %>
+<% include ../partial/side %>
+<div class="container main">
+	<div class="row">
+		<div class='col-md-3'> 
+			<p>Comfession</p>
+			<div class="list-group">
+				<li class="list-group-item active">info 1</li>
+				<li class="list-group-item ">info 1</li>
+				<li class="list-group-item ">info 1</li>
+			</div>
+		</div>
+		<div class="col-md-9">
+			<div class="thumbnail">
+				<div class="caption-full">
+					<h4><a href="/"><%= confession.category %></a></h4>
+					<p><%= confession.description %></p>
+			
+				</div>
+			</div>
+			<div class="well">
+				<div class="text-right">
+					<a class="btn btn-success" href="/confession/<%= confession._id %>/comment/new "">Add comment</a>
+				</div>	
+				<% confession.comments.forEach(function(comment){ %>
+					<div class="row">
+						<div class="col-md-12">
+							
+							<p><%= comment.text %></p>
+							<span class="pull-right"><%= comment.date %></span>
+							
+						</div>
+					</div>
+					
+				<% }); %>
+			</div>
+		</div>
+	</div>
+</div>
+
+<% include ../partial/footer %>

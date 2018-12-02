@@ -1,0 +1,36 @@
+<% include ../partial/header %>
+
+
+<div class="container main">
+	<div class="row">
+	
+		<div style="width:60%;margin:25px auto;">
+		<h1 style="text-align:center;">Submit new confession </h1>
+			<form action="/confession" style="width:40%;margin:0 auto;" method="post">
+				<div class="form-group">
+				<h3>Please select your category</h3>
+					<select class="form-control" type="text" name="category" placeholder="category">
+						<option>dream</option>
+						<option>first experience</option>
+						<option>fantasy</option>
+						<option>Guilt</option>
+						<option>Truth</option>
+						<option>Lie</option>
+
+					</select>
+				</div>
+				<div class="form-group">
+					<input class="form-control" type="text" name="description" placeholder="write your confession" />
+				</div>
+				<div class="form-group">
+					<input class="btn btn-warning btn-lg btn-block" type="submit" value="confess"/>
+				</div>
+				<a href="/confessions">go back</>
+			</form>
+			
+		</div>
+		
+	</div>
+</div>
+
+<% include ../partial/footer %>
