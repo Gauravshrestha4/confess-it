@@ -12,7 +12,10 @@ var express=require('express'),
 	flash=require('connect-flash'),
 	methodOverride=require('method-override');
 
-mongoose.connect('mongodb://localhost/Confession');
+mongoose.connect('mongodb:<gaurav>:<123456>@ds123584.mlab.com:23584/confessions');
+
+
+
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(flash());
 app.use(express.static(__dirname+'/public'));
