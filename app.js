@@ -12,7 +12,7 @@ var express=require('express'),
 	flash=require('connect-flash'),
 	methodOverride=require('method-override');
 
-mongoose.connect('mongodb:<gaurav>:<123456>@ds123584.mlab.com:23584/confessions');
+mongoose.connect('mongodb://gaurav:123456@ds123584.mlab.com:23584/confessions');
 
 
 
