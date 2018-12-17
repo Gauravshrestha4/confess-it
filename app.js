@@ -76,7 +76,7 @@ app.get('/privacy',function(req,res){
 app.get('/contact',function(req,res){
 		res.render('contact')
 	});
-app.post('/confession',function(req,res){
+app.post('/confession',isLoggedIn,function(req,res){
 	var category=req.body.category;
 	var desc=req.body.description;
 	var like=0;
@@ -90,7 +90,7 @@ app.post('/confession',function(req,res){
 	res.redirect('/confessions');
 });
 
-app.get('/confession/new',function(req,res){
+app.get('/confession/new',isLoggedIn,function(req,res){
 	res.render('confession/new');
 });
 
@@ -131,7 +131,7 @@ app.delete('/confession/:id',checkConfessionOwnership,function(req,res){
 	});
 });
 //comments routes
-app.get('/confession/:id/comment/new',function(req,res){
+app.get('/confession/:id/comment/new',isLoggedIn,function(req,res){
 	Confession.findById(req.params.id,function(err,foundConfession){
 		if(err)console.log(err);
 		else{
@@ -141,7 +141,7 @@ app.get('/confession/:id/comment/new',function(req,res){
 	
 })
 
-app.post('/confession/:id/comment',function(req,res){
+app.post('/confession/:id/comment',isLoggedIn,function(req,res){
 	Confession.findById(req.params.id,function(err,Confession){
 		if(err)console.log(err);
 		else{
@@ -201,8 +201,8 @@ app.delete('/confession/:id/comment/:commentid',checkCommentOwnership,function(r
 		}
 	});
 })
-// auth routes
-/*app.get('/register',function(req,res){
+//auth routes
+app.get('/register',function(req,res){
 	res.render('register');
 });
 
@@ -215,31 +215,31 @@ app.post('/register',function(req,res){
 			return res.render('register');
 		}
 		passport.authenticate('local')(req,res,function(){
-			res.redirect('/confession');
+			res.redirect('/confessions');
 		});
 	
 	});
-});*/
+});
 
-/*app.get('/login',function(req,res){
+app.get('/login',function(req,res){
 	res.render('login');
 });
 
 app.post('/login',passport.authenticate("local",
 {
-	successRedirect:'/confession',
+	successRedirect:'/confessions',
 	failureRedirect:'/login'
 }),function(req,res){
 
-});*/
+});
 
-/*app.get('/logout',function(req,res){
+app.get('/logout',function(req,res){
 	req.logout();
 	req.flash('success','you are logged out');
-	res.redirect('/confession');
+	res.redirect('/confessions');
 });
-*/
-/*function(req,res,next)
+
+function isLoggedIn(req,res,next)
 {
 	if(req.isAuthenticated()){
 		return next();
@@ -248,7 +248,7 @@ app.post('/login',passport.authenticate("local",
 		req.flash('error','please login First!!');
 		res.redirect('/login')
 	}
-}*/
+}
 function checkConfessionOwnership(req,res,next)
 {
 	if(req.isAuthenticated()){
